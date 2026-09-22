@@ -1,899 +1,580 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Proyecto de Feria de Ciencias sobre el uso del celular y la Inteligencia Artificial entre adolescentes.">
-    <title>Adolescentes, Tecnología e Inteligencia Artificial</title>
-    <link rel="stylesheet" href="style.css">
+    <title>ADOLESCENTES + IA | Proyecto de Investigación</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#030712',
+                            card: 'rgba(15, 23, 42, 0.65)',
+                            electric: '#0066FF',
+                            cyan: '#00F0FF',
+                            glow: 'rgba(0, 240, 255, 0.15)'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #030712;
+            color: #F8FAFC;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Styles */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+            transform: translateY(-3px);
+        }
+
+        /* Ambient Glow Effects */
+        .glow-bg {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0066FF;
+        }
+    </style>
 </head>
+<body class="relative selection:bg-brand-cyan selection:text-brand-dark">
 
-<body>
+    <!-- Ambient Glow Backgrounds -->
+    <div class="glow-bg w-[500px] h-[500px] bg-brand-electric/20 top-[-100px] left-1/2 -translate-x-1/2"></div>
+    <div class="glow-bg w-[400px] h-[400px] bg-brand-cyan/10 top-[1000px] left-[10%]"></div>
+    <div class="glow-bg w-[600px] h-[600px] bg-brand-electric/10 top-[2200px] right-[5%]"></div>
 
-    <!-- =========================
-         NAVEGACIÓN
-    ========================== -->
-    <header class="header">
-        <nav class="navbar">
-            <a href="#inicio" class="logo">
-                <span class="logo-icon">✦</span>
-                Tecno<span>IA</span>
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#inicio" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-electric to-brand-cyan p-[1px] shadow-[0_0_15px_rgba(0,240,255,0.3)]">
+                    <div class="w-full h-full bg-brand-dark rounded-[11px] flex items-center justify-center">
+                        <i data-lucide="cpu" class="w-5 h-5 text-brand-cyan group-hover:rotate-180 transition-transform duration-500"></i>
+                    </div>
+                </div>
+                <span class="font-heading font-bold text-lg tracking-wider text-white">ADOLESCENTES <span class="text-brand-cyan">+</span> IA</span>
             </a>
 
-            <input type="checkbox" id="menu-toggle">
-            <label for="menu-toggle" class="menu-button">☰</label>
-
-            <ul class="nav-menu">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#proyecto">Proyecto</a></li>
-                <li><a href="#encuesta">Encuesta</a></li>
-                <li><a href="#resultados">Resultados</a></li>
-                <li><a href="#celular">Celular</a></li>
-                <li><a href="#ia">IA</a></li>
-                <li><a href="#comparacion">Comparación</a></li>
-                <li><a href="#conclusiones">Conclusiones</a></li>
-            </ul>
-        </nav>
-    </header>
-
-
-    <main>
-
-        <!-- =========================
-             INICIO
-        ========================== -->
-        <section id="inicio" class="hero">
-
-            <div class="hero-background">
-                <span class="tech-circle circle-1"></span>
-                <span class="tech-circle circle-2"></span>
-                <span class="tech-circle circle-3"></span>
-                <span class="floating-symbol symbol-1">&lt;/&gt;</span>
-                <span class="floating-symbol symbol-2">AI</span>
-                <span class="floating-symbol symbol-3">+</span>
-                <span class="floating-symbol symbol-4">⌁</span>
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#inicio" class="hover:text-brand-cyan transition-colors">Inicio</a>
+                <a href="#perfiles" class="hover:text-brand-cyan transition-colors">Perfiles de Uso</a>
+                <a href="#investigacion" class="hover:text-brand-cyan transition-colors">Resultados</a>
+                <a href="#ia-sim" class="hover:text-brand-cyan transition-colors">Simulador IA</a>
+                <a href="#uso-responsable" class="hover:text-brand-cyan transition-colors">Uso Responsable</a>
             </div>
 
-            <div class="hero-content">
-
-                <div class="badge">
-                    <span>●</span> FERIA DE CIENCIAS 2026
-                </div>
-
-                <h1>
-                    ADOLESCENTES,<br>
-                    <span>TECNOLOGÍA</span> E<br>
-                    INTELIGENCIA ARTIFICIAL
-                </h1>
-
-                <p class="hero-subtitle">
-                    ¿Cómo utilizamos el celular y la IA en nuestra vida cotidiana?
-                </p>
-
-                <p class="hero-description">
-                    Un proyecto de investigación realizado por estudiantes de
-                    segundo año para conocer nuestros hábitos tecnológicos,
-                    analizar nuestros usos y reflexionar sobre el impacto de
-                    estas herramientas en nuestra vida cotidiana y escolar.
-                </p>
-
-                <div class="hero-buttons">
-                    <a href="#proyecto" class="btn btn-primary">Conocer el proyecto →</a>
-                    <a href="#resultados" class="btn btn-outline">Ver resultados</a>
-                </div>
-
-            </div>
-
-            <div class="hero-visual">
-
-                <div class="phone">
-                    <div class="phone-speaker"></div>
-
-                    <div class="phone-screen">
-                        <div class="phone-top">
-                            <span>09:41</span>
-                            <span>● ● ●</span>
-                        </div>
-
-                        <div class="ai-orb">
-                            <span>AI</span>
-                        </div>
-
-                        <p class="phone-question">
-                            ¿Cómo usamos<br>
-                            la tecnología?
-                        </p>
-
-                        <div class="phone-bars">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="orbit orbit-1"></div>
-                <div class="orbit orbit-2"></div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             PROYECTO
-        ========================== -->
-        <section id="proyecto" class="section">
-
-            <div class="section-heading">
-                <span class="section-number">01</span>
-                <div>
-                    <span class="section-label">NUESTRO PROYECTO</span>
-                    <h2>Investigar para comprender</h2>
-                </div>
-            </div>
-
-            <div class="project-question">
-                <div class="question-icon">?</div>
-
-                <div>
-                    <span class="small-label">PREGUNTA PRINCIPAL</span>
-                    <h3>
-                        “¿Cómo utilizan los adolescentes el celular y la
-                        Inteligencia Artificial y qué impacto tienen estas
-                        tecnologías en su vida cotidiana y escolar?”
-                    </h3>
-                </div>
-            </div>
-
-            <div class="cards-grid three-columns">
-
-                <article class="info-card">
-                    <div class="card-icon">🔎</div>
-                    <span class="card-number">01</span>
-                    <h3>Tema de investigación</h3>
-                    <p>
-                        Investigamos cómo los adolescentes utilizan el celular
-                        y las herramientas de Inteligencia Artificial en su
-                        vida cotidiana y escolar.
-                    </p>
-                </article>
-
-                <article class="info-card">
-                    <div class="card-icon">🎯</div>
-                    <span class="card-number">02</span>
-                    <h3>Objetivos</h3>
-                    <p>
-                        Conocer hábitos, identificar usos frecuentes, analizar
-                        percepciones y reflexionar sobre los beneficios y
-                        desafíos de estas tecnologías.
-                    </p>
-                </article>
-
-                <article class="info-card">
-                    <div class="card-icon">💡</div>
-                    <span class="card-number">03</span>
-                    <h3>¿Por qué elegimos este tema?</h3>
-                    <p>
-                        Porque el celular y la IA forman parte de nuestra vida
-                        diaria y queríamos conocer qué ocurre realmente entre
-                        los estudiantes.
-                    </p>
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             ENCUESTA
-        ========================== -->
-        <section id="encuesta" class="section section-dark">
-
-            <div class="section-heading light">
-                <span class="section-number">02</span>
-                <div>
-                    <span class="section-label">LA ENCUESTA</span>
-                    <h2>Preguntamos para obtener datos</h2>
-                </div>
-            </div>
-
-            <div class="survey-intro">
-                <div class="survey-stat">
-                    <strong>01</strong>
-                    <span>Preguntas</span>
-                </div>
-
-                <p>
-                    Realizamos una encuesta a estudiantes para conocer sus
-                    hábitos, opiniones y experiencias relacionadas con el
-                    celular y la Inteligencia Artificial.
-                </p>
-            </div>
-
-            <div class="questions-grid">
-
-                <div class="question-card">
-                    <span>01</span>
-                    <p>¿Cuántas horas por día utilizás el celular?</p>
-                </div>
-
-                <div class="question-card">
-                    <span>02</span>
-                    <p>¿Para qué utilizás principalmente el celular?</p>
-                </div>
-
-                <div class="question-card">
-                    <span>03</span>
-                    <p>¿Usás el celular mientras estudiás?</p>
-                </div>
-
-                <div class="question-card">
-                    <span>04</span>
-                    <p>¿Dormís con el celular cerca?</p>
-                </div>
-
-                <div class="question-card">
-                    <span>05</span>
-                    <p>¿Creés que utilizás demasiado el celular?</p>
-                </div>
-
-                <div class="question-card ai-question">
-                    <span>06</span>
-                    <p>¿Usás Inteligencia Artificial?</p>
-                </div>
-
-                <div class="question-card ai-question">
-                    <span>07</span>
-                    <p>¿Con qué frecuencia utilizás IA?</p>
-                </div>
-
-                <div class="question-card ai-question">
-                    <span>08</span>
-                    <p>¿Para qué utilizás principalmente la IA?</p>
-                </div>
-
-                <div class="question-card ai-question">
-                    <span>09</span>
-                    <p>¿Confiás en la información proporcionada por la IA?</p>
-                </div>
-
-                <div class="question-card ai-question">
-                    <span>10</span>
-                    <p>¿Creés que la IA puede afectar la forma en que estudiamos?</p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             RESULTADOS
-        ========================== -->
-        <section id="resultados" class="section">
-
-            <div class="section-heading">
-                <span class="section-number">03</span>
-                <div>
-                    <span class="section-label">RESULTADOS</span>
-                    <h2>¿Qué descubrimos?</h2>
-                </div>
-            </div>
-
-            <div class="example-warning">
-                <span class="warning-icon">!</span>
-                <div>
-                    <strong>DATOS DE EJEMPLO</strong>
-                    <p>
-                        Los porcentajes de esta página son únicamente
-                        ilustrativos. Reemplazá los valores directamente en
-                        el HTML cuando tengan los resultados reales de la
-                        encuesta.
-                    </p>
-                </div>
-            </div>
-
-            <div class="results-grid">
-
-                <article class="result-card">
-                    <div class="percentage-circle circle-75">
-                        <span>75%</span>
-                    </div>
-                    <h3>Más de 4 horas</h3>
-                    <p>Utiliza el celular más de 4 horas por día.</p>
-                </article>
-
-                <article class="result-card">
-                    <div class="percentage-circle circle-62">
-                        <span>62%</span>
-                    </div>
-                    <h3>Mientras estudia</h3>
-                    <p>Utiliza el celular mientras estudia.</p>
-                </article>
-
-                <article class="result-card">
-                    <div class="percentage-circle circle-80">
-                        <span>80%</span>
-                    </div>
-                    <h3>Concentración</h3>
-                    <p>Considera que el celular afecta su concentración.</p>
-                </article>
-
-            </div>
-
-            <div class="results-chart">
-
-                <div class="chart-title">
-                    <div>
-                        <span class="small-label">DATOS DE EJEMPLO</span>
-                        <h3>Algunos resultados de nuestra encuesta</h3>
-                    </div>
-                    <span class="chart-tag">REEMPLAZABLE</span>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar-label">
-                        <span>Más de 4 horas de celular</span>
-                        <strong>75%</strong>
-                    </div>
-                    <div class="bar-track">
-                        <div class="bar-fill" style="width: 75%;"></div>
-                    </div>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar-label">
-                        <span>Usa celular mientras estudia</span>
-                        <strong>62%</strong>
-                    </div>
-                    <div class="bar-track">
-                        <div class="bar-fill" style="width: 62%;"></div>
-                    </div>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar-label">
-                        <span>Considera que afecta la concentración</span>
-                        <strong>80%</strong>
-                    </div>
-                    <div class="bar-track">
-                        <div class="bar-fill" style="width: 80%;"></div>
-                    </div>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar-label">
-                        <span>Utiliza Inteligencia Artificial</span>
-                        <strong>68%</strong>
-                    </div>
-                    <div class="bar-track">
-                        <div class="bar-fill" style="width: 68%;"></div>
-                    </div>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             CELULAR
-        ========================== -->
-        <section id="celular" class="section section-light">
-
-            <div class="section-heading">
-                <span class="section-number">04</span>
-                <div>
-                    <span class="section-label">USO DEL CELULAR</span>
-                    <h2>Nuestros hábitos digitales</h2>
-                </div>
-            </div>
-
-            <div class="two-column">
-
-                <div>
-                    <p class="lead">
-                        El celular puede ser una herramienta para comunicarnos,
-                        informarnos, entretenernos y estudiar. Pero también
-                        puede ocupar una parte importante de nuestro tiempo.
-                    </p>
-
-                    <div class="phone-use-list">
-
-                        <div class="use-row">
-                            <div class="use-icon">⏱</div>
-                            <div>
-                                <h4>Horas de uso diario</h4>
-                                <p>Ejemplo: más de 4 horas</p>
-                            </div>
-                        </div>
-
-                        <div class="use-row">
-                            <div class="use-icon">📱</div>
-                            <div>
-                                <h4>Principales usos</h4>
-                                <p>Redes sociales, videos, comunicación y estudio.</p>
-                            </div>
-                        </div>
-
-                        <div class="use-row">
-                            <div class="use-icon">📚</div>
-                            <div>
-                                <h4>Durante el estudio</h4>
-                                <p>Ejemplo: 62% reconoce utilizarlo mientras estudia.</p>
-                            </div>
-                        </div>
-
-                        <div class="use-row">
-                            <div class="use-icon">🌙</div>
-                            <div>
-                                <h4>Antes de dormir</h4>
-                                <p>Resultado a completar con los datos reales.</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="usage-panel">
-
-                    <span class="small-label">DATOS DE EJEMPLO</span>
-                    <h3>¿Cómo utilizamos el celular?</h3>
-
-                    <div class="bar-item">
-                        <div class="bar-label">
-                            <span>Redes sociales</span>
-                            <strong>72%</strong>
-                        </div>
-                        <div class="bar-track">
-                            <div class="bar-fill secondary" style="width: 72%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="bar-item">
-                        <div class="bar-label">
-                            <span>Entretenimiento</span>
-                            <strong>65%</strong>
-                        </div>
-                        <div class="bar-track">
-                            <div class="bar-fill secondary" style="width: 65%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="bar-item">
-                        <div class="bar-label">
-                            <span>Comunicación</span>
-                            <strong>60%</strong>
-                        </div>
-                        <div class="bar-track">
-                            <div class="bar-fill secondary" style="width: 60%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="bar-item">
-                        <div class="bar-label">
-                            <span>Estudio</span>
-                            <strong>45%</strong>
-                        </div>
-                        <div class="bar-track">
-                            <div class="bar-fill secondary" style="width: 45%;"></div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="mini-cards">
-
-                <article>
-                    <span class="mini-icon">🍽</span>
-                    <h3>Durante las comidas</h3>
-                    <p>Completar con el porcentaje obtenido.</p>
-                    <strong>XX%</strong>
-                </article>
-
-                <article>
-                    <span class="mini-icon">🌙</span>
-                    <h3>Antes de dormir</h3>
-                    <p>Completar con el porcentaje obtenido.</p>
-                    <strong>XX%</strong>
-                </article>
-
-                <article>
-                    <span class="mini-icon">⚠</span>
-                    <h3>Uso excesivo</h3>
-                    <p>¿Los estudiantes creen que usan demasiado el celular?</p>
-                    <strong>XX%</strong>
-                </article>
-
-                <article>
-                    <span class="mini-icon">🧠</span>
-                    <h3>Concentración</h3>
-                    <p>Percepción sobre la concentración.</p>
-                    <strong>80%</strong>
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             IA
-        ========================== -->
-        <section id="ia" class="section ai-section">
-
-            <div class="section-heading light">
-                <span class="section-number">05</span>
-                <div>
-                    <span class="section-label">INTELIGENCIA ARTIFICIAL</span>
-                    <h2>Una nueva herramienta para aprender</h2>
-                </div>
-            </div>
-
-            <div class="ai-intro">
-
-                <div class="ai-visual">
-                    <div class="ai-core">
-                        <span>AI</span>
-                    </div>
-
-                    <span class="ai-node node-1">+</span>
-                    <span class="ai-node node-2">?</span>
-                    <span class="ai-node node-3">∞</span>
-                    <span class="ai-node node-4">✓</span>
-                </div>
-
-                <div>
-                    <p class="lead light-text">
-                        La Inteligencia Artificial forma parte cada vez más de
-                        nuestras actividades. La utilizamos para buscar ideas,
-                        resolver dudas, estudiar, crear contenidos y realizar
-                        diferentes tareas.
-                    </p>
-
-                    <p class="light-text">
-                        Nuestro objetivo fue conocer cómo la utilizan los
-                        estudiantes y qué piensan sobre sus beneficios,
-                        limitaciones y posibles riesgos.
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="ai-results">
-
-                <article class="ai-stat-card">
-                    <span class="ai-stat-icon">🤖</span>
-                    <strong>68%</strong>
-                    <h3>Utiliza IA</h3>
-                    <p>Dato de ejemplo reemplazable.</p>
-                </article>
-
-                <article class="ai-stat-card">
-                    <span class="ai-stat-icon">📚</span>
-                    <strong>55%</strong>
-                    <h3>Para tareas escolares</h3>
-                    <p>Dato de ejemplo reemplazable.</p>
-                </article>
-
-                <article class="ai-stat-card">
-                    <span class="ai-stat-icon">🔍</span>
-                    <strong>40%</strong>
-                    <h3>Verifica la información</h3>
-                    <p>Dato de ejemplo reemplazable.</p>
-                </article>
-
-                <article class="ai-stat-card">
-                    <span class="ai-stat-icon">💭</span>
-                    <strong>70%</strong>
-                    <h3>Ve beneficios</h3>
-                    <p>Dato de ejemplo reemplazable.</p>
-                </article>
-
-            </div>
-
-            <div class="reflection">
-                <span class="quote-mark">“</span>
-                <p>
-                    La Inteligencia Artificial puede ser una herramienta útil,
-                    pero la información que proporciona debe ser analizada y
-                    verificada.
-                </p>
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             COMPARACIÓN
-        ========================== -->
-        <section id="comparacion" class="section">
-
-            <div class="section-heading">
-                <span class="section-number">06</span>
-                <div>
-                    <span class="section-label">COMPARACIÓN</span>
-                    <h2>Miramos los datos en conjunto</h2>
-                </div>
-            </div>
-
-            <p class="section-description">
-                Estas comparaciones permitirán observar relaciones entre
-                diferentes respuestas de la encuesta. Los valores son
-                ejemplos y deberán reemplazarse por los datos reales.
-            </p>
-
-            <div class="comparison-grid">
-
-                <article class="comparison-card">
-                    <div class="comparison-header">
-                        <span>01</span>
-                        <h3>Celular vs. concentración</h3>
-                    </div>
-
-                    <div class="comparison-values">
-
-                        <div>
-                            <span>Uso &gt; 4 h</span>
-                            <strong>75%</strong>
-                        </div>
-
-                        <div class="comparison-vs">VS</div>
-
-                        <div>
-                            <span>Afecta concentración</span>
-                            <strong>80%</strong>
-                        </div>
-
-                    </div>
-
-                    <div class="comparison-line">
-                        <span style="width: 75%;"></span>
-                    </div>
-
-                    <div class="comparison-line second">
-                        <span style="width: 80%;"></span>
-                    </div>
-                </article>
-
-
-                <article class="comparison-card">
-                    <div class="comparison-header">
-                        <span>02</span>
-                        <h3>Horas de celular vs. uso excesivo</h3>
-                    </div>
-
-                    <div class="comparison-values">
-
-                        <div>
-                            <span>Más de 4 h</span>
-                            <strong>75%</strong>
-                        </div>
-
-                        <div class="comparison-vs">VS</div>
-
-                        <div>
-                            <span>Lo considera excesivo</span>
-                            <strong>XX%</strong>
-                        </div>
-
-                    </div>
-
-                    <div class="comparison-line">
-                        <span style="width: 75%;"></span>
-                    </div>
-
-                    <div class="comparison-line second">
-                        <span style="width: 50%;"></span>
-                    </div>
-                </article>
-
-
-                <article class="comparison-card">
-                    <div class="comparison-header">
-                        <span>03</span>
-                        <h3>Uso de IA vs. tareas escolares</h3>
-                    </div>
-
-                    <div class="comparison-values">
-
-                        <div>
-                            <span>Utiliza IA</span>
-                            <strong>68%</strong>
-                        </div>
-
-                        <div class="comparison-vs">VS</div>
-
-                        <div>
-                            <span>Para tareas</span>
-                            <strong>55%</strong>
-                        </div>
-
-                    </div>
-
-                    <div class="comparison-line">
-                        <span style="width: 68%;"></span>
-                    </div>
-
-                    <div class="comparison-line second">
-                        <span style="width: 55%;"></span>
-                    </div>
-                </article>
-
-            </div>
-
-            <div class="edit-note">
-                <strong>✎ Para actualizar:</strong>
-                solamente modificá los porcentajes escritos en el HTML y el
-                valor de <code>width</code> de cada barra.
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             CONCLUSIONES
-        ========================== -->
-        <section id="conclusiones" class="section conclusions-section">
-
-            <div class="section-heading light">
-                <span class="section-number">07</span>
-                <div>
-                    <span class="section-label">CONCLUSIONES</span>
-                    <h2>¿Qué nos dicen los datos?</h2>
-                </div>
-            </div>
-
-            <div class="conclusion-box">
-
-                <div class="conclusion-symbol">∑</div>
-
-                <div>
-                    <span class="small-label">ESPACIO PARA LOS RESULTADOS FINALES</span>
-
-                    <h3>
-                        Aquí colocaremos las conclusiones obtenidas a partir de
-                        nuestros datos reales.
-                    </h3>
-
-                    <p>
-                        Este espacio será completado por los estudiantes luego
-                        de analizar los resultados definitivos de la encuesta.
-                    </p>
-                </div>
-
-            </div>
-
-            <div class="conclusion-points">
-
-                <div>
-                    <span>01</span>
-                    <p>Conclusión obtenida a partir de los datos.</p>
-                </div>
-
-                <div>
-                    <span>02</span>
-                    <p>Otro hallazgo importante de la investigación.</p>
-                </div>
-
-                <div>
-                    <span>03</span>
-                    <p>Una reflexión elaborada por los estudiantes.</p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             LO QUE APRENDIMOS
-        ========================== -->
-        <section id="aprendimos" class="section learn-section">
-
-            <div class="section-heading">
-                <span class="section-number">08</span>
-                <div>
-                    <span class="section-label">LO QUE APRENDIMOS</span>
-                    <h2>Una investigación hecha por nosotros</h2>
-                </div>
-            </div>
-
-            <div class="learn-grid">
-
-                <article class="learn-card">
-                    <span class="learn-number">01</span>
-                    <span class="learn-icon">🧠</span>
-                    <h3>¿Qué aprendimos?</h3>
-                    <p>
-                        Espacio para contar qué conocimientos adquirimos
-                        durante el proyecto.
-                    </p>
-                </article>
-
-                <article class="learn-card">
-                    <span class="learn-number">02</span>
-                    <span class="learn-icon">🔎</span>
-                    <h3>¿Qué descubrimos?</h3>
-                    <p>
-                        Espacio para explicar los descubrimientos realizados
-                        a partir de la encuesta.
-                    </p>
-                </article>
-
-                <article class="learn-card">
-                    <span class="learn-number">03</span>
-                    <span class="learn-icon">🧩</span>
-                    <h3>¿Qué dificultades tuvimos?</h3>
-                    <p>
-                        Espacio para contar los desafíos que aparecieron
-                        durante el proyecto.
-                    </p>
-                </article>
-
-                <article class="learn-card">
-                    <span class="learn-number">04</span>
-                    <span class="learn-icon">🤖</span>
-                    <h3>¿Cómo usamos la IA?</h3>
-                    <p>
-                        Explicaremos de qué manera utilizamos la Inteligencia
-                        Artificial durante nuestra investigación.
-                    </p>
-                </article>
-
-                <article class="learn-card">
-                    <span class="learn-number">05</span>
-                    <span class="learn-icon">🌐</span>
-                    <h3>Uso responsable</h3>
-                    <p>
-                        Reflexionamos sobre la importancia de utilizar la
-                        tecnología de manera responsable y consciente.
-                    </p>
-                </article>
-
-            </div>
-
-            <div class="final-message">
-                <div class="final-icon">✦</div>
-
-                <div>
-                    <span class="small-label">NUESTRA REFLEXIÓN</span>
-                    <h3>
-                        La tecnología no es solamente una herramienta:
-                        también depende de cómo decidimos utilizarla.
-                    </h3>
-                </div>
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-    <footer class="footer">
-
-        <div class="footer-logo">
-            <span>✦</span> TecnoIA
+            <a href="#investigacion" class="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-brand-electric to-blue-700 hover:shadow-[0_0_20px_rgba(0,240,255,0.4)] border border-white/20 transition-all transform hover:-translate-y-0.5">
+                <span>Explorar proyecto</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white p-2">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
         </div>
 
-        <p>
-            Proyecto de Feria de Ciencias · Segundo Año · 2026
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full glass-panel border-t border-slate-800 p-6 flex-col gap-4 text-center text-slate-300">
+            <a href="#inicio" class="py-2 hover:text-brand-cyan">Inicio</a>
+            <a href="#perfiles" class="py-2 hover:text-brand-cyan">Perfiles de Uso</a>
+            <a href="#investigacion" class="py-2 hover:text-brand-cyan">Resultados</a>
+            <a href="#ia-sim" class="py-2 hover:text-brand-cyan">Simulador IA</a>
+            <a href="#uso-responsable" class="py-2 hover:text-brand-cyan">Uso Responsable</a>
+            <a href="#investigacion" class="mt-2 inline-block px-6 py-3 rounded-full text-xs font-semibold text-white bg-brand-electric">Explorar proyecto</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-16 px-4 text-center z-10">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border-brand-cyan/30 text-brand-cyan text-xs font-medium mb-8">
+            <span class="w-2 h-2 rounded-full bg-brand-cyan animate-pulse"></span>
+            Feria de Ciencias 2026 • Investigación Estudiantil
+        </div>
+
+        <h1 class="font-heading font-bold text-4xl sm:text-6xl md:text-7xl max-w-5xl leading-tight mb-6">
+            Adolescentes, Tecnología e <br/>
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-brand-cyan">Inteligencia Artificial</span>
+        </h1>
+
+        <p class="text-slate-400 text-base sm:text-lg max-w-2xl font-light mb-10 leading-relaxed">
+            Una investigación de campo desarrollada por estudiantes de secundaria para analizar cómo la IA generativa redefine los hábitos de estudio, la creatividad y la ética en la juventud.
         </p>
 
-        <div class="footer-line"></div>
+        <div class="flex flex-wrap justify-center gap-4 mb-16">
+            <a href="#investigacion" class="px-7 py-3.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-brand-electric to-blue-600 hover:shadow-[0_0_25px_rgba(0,102,255,0.5)] border border-white/20 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                Ver Resultados
+            </a>
+            <a href="#perfiles" class="px-7 py-3.5 rounded-full text-sm font-semibold text-slate-200 glass-card hover:bg-white/10 transition-all flex items-center gap-2">
+                <i data-lucide="users" class="w-4 h-4"></i>
+                Perfiles Estudiantiles
+            </a>
+        </div>
 
-        <p class="footer-small">
-            Adolescentes · Tecnología · Inteligencia Artificial · Ciencia
-        </p>
+        <!-- HERO DASHBOARD HIGHLIGHTS -->
+        <div class="w-full max-w-5xl glass-panel rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden border-brand-cyan/20">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+                <div class="glass-card p-5 rounded-xl text-left">
+                    <div class="text-3xl font-heading font-bold text-brand-cyan mb-1">78.4%</div>
+                    <div class="text-xs text-slate-400">Utiliza IA para consultas académicas</div>
+                </div>
+                <div class="glass-card p-5 rounded-xl text-left">
+                    <div class="text-3xl font-heading font-bold text-brand-cyan mb-1">3.8 h</div>
+                    <div class="text-xs text-slate-400">Promedio de tiempo en pantalla/día</div>
+                </div>
+                <div class="glass-card p-5 rounded-xl text-left">
+                    <div class="text-3xl font-heading font-bold text-brand-cyan mb-1">450+</div>
+                    <div class="text-xs text-slate-400">Estudiantes encuestados</div>
+                </div>
+                <div class="glass-card p-5 rounded-xl text-left">
+                    <div class="text-3xl font-heading font-bold text-brand-cyan mb-1">62%</div>
+                    <div class="text-xs text-slate-400">Expresa inquietud por ética/sesgos</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- SECCIÓN: PERFILES DE USO ESTUDIANTIL -->
+    <section id="perfiles" class="py-24 px-4 relative z-10 border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-card border-brand-cyan/20 text-brand-cyan text-xs mb-3">
+                    <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                    <span>Categorías del Estudio</span>
+                </div>
+                <h2 class="font-heading font-bold text-3xl sm:text-5xl text-white mb-4">
+                    Perfiles de Interacción con la IA
+                </h2>
+                <p class="text-slate-400 font-light">
+                    Identificamos tres patrones principales de adopción tecnológica en las aulas de nivel secundario.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Perfil 1: Pasivo -->
+                <div class="glass-panel p-8 rounded-2xl border-red-500/30 hover:border-red-500/60 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-bold text-red-400 bg-red-500/10 px-3 py-1.5 rounded-full border border-red-500/20">PERFIL PASIVO</span>
+                            <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400">
+                                <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-white mb-3">Sustitución Directa</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            Utiliza la inteligencia artificial para automatizar tareas sin realizar una revisión previa ni cuestionar los datos obtenidos.
+                        </p>
+                    </div>
+                    <div class="space-y-3 pt-4 border-t border-slate-800">
+                        <div class="flex items-center gap-2 text-xs text-slate-300">
+                            <i data-lucide="x-circle" class="w-4 h-4 text-red-400"></i>
+                            <span>Nivel de dependencia muy alto</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-slate-300">
+                            <i data-lucide="x-circle" class="w-4 h-4 text-red-400"></i>
+                            <span>Verificación de fuentes nula</span>
+                        </div>
+                        <div class="mt-4 pt-3 text-right">
+                            <span class="text-2xl font-bold font-heading text-red-400">28%</span>
+                            <span class="text-xs text-slate-500 block">de los estudiantes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Perfil 2: Asistido -->
+                <div class="glass-panel p-8 rounded-2xl border-brand-cyan/30 hover:border-brand-cyan/60 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-bold text-brand-cyan bg-brand-cyan/10 px-3 py-1.5 rounded-full border border-brand-cyan/20">PERFIL ASISTIDO</span>
+                            <div class="w-10 h-10 rounded-xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan">
+                                <i data-lucide="help-circle" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-white mb-3">Apoyo Académico</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            Recurre a la IA para resolver dudas puntuales, resumir textos largos o estructurar borradores de estudio.
+                        </p>
+                    </div>
+                    <div class="space-y-3 pt-4 border-t border-slate-800">
+                        <div class="flex items-center gap-2 text-xs text-slate-300">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan"></i>
+                            <span>Uso como tutor complementario</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-slate-300">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan"></i>
+                            <span>Revisión parcial del contenido</span>
+                        </div>
+                        <div class="mt-4 pt-3 text-right">
+                            <span class="text-2xl font-bold font-heading text-brand-cyan">54%</span>
+                            <span class="text-xs text-slate-500 block">de los estudiantes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Perfil 3: Avanzado -->
+                <div class="glass-panel p-8 rounded-2xl border-green-500/30 hover:border-green-500/60 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-bold text-green-400 bg-green-500/10 px-3 py-1.5 rounded-full border border-green-500/20">PERFIL AVANZADO</span>
+                            <div class="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400">
+                                <i data-lucide="zap" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                        <h3 class="font-heading font-bold text-2xl text-white mb-3">Catalizador Creativo</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            Emplea la tecnología para generar ideas, comparar enfoques reflexivos y profundizar en investigaciones propias.
+                        </p>
+                    </div>
+                    <div class="space-y-3 pt-4 border-t border-slate-800">
+                        <div class="flex items-center gap-2 text-xs text-slate-300">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-green-400"></i>
+                            <span>Pensamiento crítico elevado</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-slate-300">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-green-400"></i>
+                            <span>Validación de múltiples fuentes</span>
+                        </div>
+                        <div class="mt-4 pt-3 text-right">
+                            <span class="text-2xl font-bold font-heading text-green-400">18%</span>
+                            <span class="text-xs text-slate-500 block">de los estudiantes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: DASHBOARD DE RESULTADOS -->
+    <section id="investigacion" class="py-24 px-4 relative z-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-card border-brand-cyan/20 text-brand-cyan text-xs mb-3">
+                    <i data-lucide="pie-chart" class="w-3.5 h-3.5"></i>
+                    <span>Datos Cuantitativos</span>
+                </div>
+                <h2 class="font-heading font-bold text-3xl sm:text-5xl text-white mb-4">
+                    Resultados de la Investigación
+                </h2>
+                <p class="text-slate-400 font-light">
+                    Muestreo representativo sobre los patrones de uso y percepción en la comunidad educativa secundaria.
+                </p>
+            </div>
+
+            <!-- Gráficos -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Gráfico 1: Materias -->
+                <div class="glass-panel p-6 sm:p-8 rounded-2xl border-slate-800">
+                    <h3 class="font-heading font-semibold text-lg text-white mb-2 flex items-center gap-2">
+                        <i data-lucide="book-open" class="w-5 h-5 text-brand-cyan"></i>
+                        Uso de IA según el Área Escolar
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-6">Porcentaje de alumnos que consultan IA para tareas específicas.</p>
+                    <div class="h-64 relative">
+                        <canvas id="chartSubjects"></canvas>
+                    </div>
+                </div>
+
+                <!-- Gráfico 2: Postura Ética -->
+                <div class="glass-panel p-6 sm:p-8 rounded-2xl border-slate-800">
+                    <h3 class="font-heading font-semibold text-lg text-white mb-2 flex items-center gap-2">
+                        <i data-lucide="brain-circuit" class="w-5 h-5 text-brand-cyan"></i>
+                        Percepción sobre Honestidad Académica
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-6">Opinión de los estudiantes respecto al uso de IA en evaluaciones.</p>
+                    <div class="h-64 relative">
+                        <canvas id="chartEthics"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjetas de Hallazgos Clave -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-xl border-slate-800">
+                    <div class="text-brand-cyan font-mono text-xs mb-2">HALLAZGO #1</div>
+                    <h4 class="font-heading font-bold text-white text-base mb-2">Tutoría Personalizada</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        El 64% de los alumnos indica usar la IA para pedir explicaciones paso a paso de temas complejos que no comprendieron del todo en clase.
+                    </p>
+                </div>
+                <div class="glass-card p-6 rounded-xl border-slate-800">
+                    <div class="text-brand-cyan font-mono text-xs mb-2">HALLAZGO #2</div>
+                    <h4 class="font-heading font-bold text-white text-base mb-2">Verificación de Información</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Solo 3 de cada 10 jóvenes contrasta activamente las respuestas dadas por la IA con buscadores tradicionales o libros de texto.
+                    </p>
+                </div>
+                <div class="glass-card p-6 rounded-xl border-slate-800">
+                    <div class="text-brand-cyan font-mono text-xs mb-2">HALLAZGO #3</div>
+                    <h4 class="font-heading font-bold text-white text-base mb-2">Percepción del Futuro</h4>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Un 41% manifiesta inquietud por cómo la rápida aceleración de la IA afectará la elección de sus carreras universitarias.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: SIMULADOR INTERACTIVO -->
+    <section id="ia-sim" class="py-24 px-4 relative z-10 border-t border-slate-800">
+        <div class="max-w-4xl mx-auto glass-panel p-8 rounded-3xl border-brand-cyan/30 shadow-[0_0_50px_rgba(0,102,255,0.1)]">
+            <div class="text-center mb-8">
+                <span class="text-xs font-mono text-brand-cyan uppercase tracking-widest">Demostración en Vivo</span>
+                <h2 class="font-heading font-bold text-2xl sm:text-4xl text-white mt-1">
+                    Simulador de Razonamiento Algorítmico
+                </h2>
+                <p class="text-slate-400 text-xs sm:text-sm mt-2">
+                    Haz clic en una pregunta para simular la síntesis de un modelo frente a consultas sobre jóvenes y tecnología.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex gap-2 flex-wrap justify-center mb-6">
+                    <button onclick="runSimulation('creatividad')" class="px-4 py-2 rounded-xl text-xs font-medium glass-card hover:border-brand-cyan hover:text-brand-cyan text-slate-300 transition-all">
+                        ¿Remplaza la creatividad?
+                    </button>
+                    <button onclick="runSimulation('futuro')" class="px-4 py-2 rounded-xl text-xs font-medium glass-card hover:border-brand-cyan hover:text-brand-cyan text-slate-300 transition-all">
+                        ¿Impacto en empleos futuros?
+                    </button>
+                    <button onclick="runSimulation('aula')" class="px-4 py-2 rounded-xl text-xs font-medium glass-card hover:border-brand-cyan hover:text-brand-cyan text-slate-300 transition-all">
+                        ¿Uso ideal en el aula?
+                    </button>
+                </div>
+
+                <div id="sim-output" class="bg-slate-950/90 border border-slate-800 rounded-2xl p-6 font-mono text-xs text-slate-300 min-h-[140px] flex items-center justify-center text-center">
+                    <span class="text-slate-500">Selecciona un interrogante arriba para iniciar la simulación...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: GUÍA DE USO RESPONSABLE -->
+    <section id="uso-responsable" class="py-24 px-4 relative z-10 border-t border-slate-800">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-card border-brand-cyan/20 text-brand-cyan text-xs mb-3">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                    <span>Buenas Prácticas Académicas</span>
+                </div>
+                <h2 class="font-heading font-bold text-3xl sm:text-5xl text-white mb-4">
+                    Recomendaciones Éticas
+                </h2>
+                <p class="text-slate-400 font-light">
+                    Principios propuestos para aprovechar las herramientas digitales sin perder el pensamiento crítico.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <details class="glass-panel rounded-2xl p-6 border-slate-800 group [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+                    <summary class="flex items-center justify-between font-heading font-semibold text-white text-base">
+                        <span>1. La IA como Copiloto, no como Piloto</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        La inteligencia artificial debe emplearse para organizar ideas, revisar aspectos gramaticales o generar borradores iniciales, pero la postura analítica y la conclusión final deben ser autoría del estudiante.
+                    </p>
+                </details>
+
+                <details class="glass-panel rounded-2xl p-6 border-slate-800 group [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+                    <summary class="flex items-center justify-between font-heading font-semibold text-white text-base">
+                        <span>2. Verificación y Triangulación de Información</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        Cualquier dato bibliográfico, fecha histórica o fórmula proporcionada por un modelo generativo debe ser validada en al menos dos fuentes confiables adicionales para evitar la propagación de alucinaciones algorítmicas.
+                    </p>
+                </details>
+
+                <details class="glass-panel rounded-2xl p-6 border-slate-800 group [&_summary::-webkit-details-marker]:hidden cursor-pointer">
+                    <summary class="flex items-center justify-between font-heading font-semibold text-white text-base">
+                        <span>3. Transparencia en la Entrega de Trabajos</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-brand-cyan transition-transform group-open:rotate-180"></i>
+                    </summary>
+                    <p class="mt-4 text-xs sm:text-sm text-slate-400 leading-relaxed">
+                        Es recomendable citar o explicitar la intervención de herramientas de IA al pie de los proyectos (ejemplo: "Se utilizó un modelo de lenguaje para la corrección ortográfica y la lluvia de ideas iniciales").
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 border-t border-slate-900 bg-slate-950/80 text-xs text-slate-500 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <i data-lucide="graduation-cap" class="w-4 h-4 text-brand-cyan"></i>
+                <span>Proyecto para la Feria de Ciencias y Tecnología 2026</span>
+            </div>
+            <div>
+                Diseñado por Estudiantes de Educación Secundaria
+            </div>
+        </div>
     </footer>
 
+    <!-- SCRIPT JS PRINCIPAL -->
+    <script>
+        // Inicializar Lucide Icons
+        lucide.createIcons();
+
+        // Navbar Scroll Blur Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-panel', 'shadow-2xl');
+            } else {
+                navbar.classList.remove('glass-panel', 'shadow-2xl');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        // Renderizado de Gráficos con Chart.js
+        document.addEventListener('DOMContentLoaded', () => {
+            // Chart 1: Materias
+            const ctx1 = document.getElementById('chartSubjects').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Matemática', 'Lengua / Lengua Extranjera', 'Historia / Cs. Sociales', 'Ciencias Exactas', 'Arte / Diseño'],
+                    datasets: [{
+                        label: '% de uso frecuente',
+                        data: [72, 85, 68, 62, 30],
+                        backgroundColor: 'rgba(0, 240, 255, 0.4)',
+                        borderColor: '#00F0FF',
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            ticks: { color: '#94A3B8' }
+                        },
+                        x: { 
+                            grid: { display: false },
+                            ticks: { color: '#94A3B8' }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Ética
+            const ctx2 = document.getElementById('chartEthics').getContext('2d');
+            new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Herramienta de estudio válida', 'Falta ética si no se avisa', 'Debería limitarse/prohibirse', 'Sin posición definida'],
+                    datasets: [{
+                        data: [58, 28, 8, 6],
+                        backgroundColor: [
+                            'rgba(0, 240, 255, 0.7)',
+                            'rgba(0, 102, 255, 0.7)',
+                            'rgba(239, 68, 68, 0.7)',
+                            'rgba(148, 163, 184, 0.4)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { color: '#94A3B8', font: { size: 10 } }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Lógica del Simulador
+        function runSimulation(topic) {
+            const output = document.getElementById('sim-output');
+            output.innerHTML = '<span class="text-brand-cyan animate-pulse">Sintetizando información y procesando perspectiva...</span>';
+
+            const responses = {
+                'creatividad': '"La IA no anula la creatividad estudiantil; la desplaza. Los alumnos pasan de la ejecución mecánica a actuar como directores creativos que editan, guían y evalúan críticamente lo generado."',
+                'futuro': '"El 82% de los adolescentes no considera a la IA un enemigo laboral, pero reconoce la importancia de fortalecer habilidades humanas como la empatía, el trabajo en equipo y el pensamiento ético."',
+                'aula': '"El uso ideal en el aula implica transformar la IA en un tutor socrático que guía mediante preguntas reflexivas en lugar de limitarse a dar la respuesta servida."'
+            };
+
+            setTimeout(() => {
+                output.innerHTML = `<div class="text-left w-full"><span class="text-brand-cyan font-bold block mb-1">&gt; SÍNTESIS COMPLETADA:</span><p class="text-slate-200">${responses[topic]}</p></div>`;
+            }, 600);
+        }
+    </script>
 </body>
 </html>
